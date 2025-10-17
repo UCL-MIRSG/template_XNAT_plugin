@@ -124,8 +124,8 @@ This will trigger a github actions workflow creating:
 
 - a new Github release with `.jar` attached
 - a new package on
-  [Github packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) -
-  this can be accessed from the `Packages` section in the sidebar of your
+  [Github packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
+  This can be accessed from the `Packages` section in the sidebar of your
   plugin's github page.
 
 For information about how to use this package as a dependency, see the github
