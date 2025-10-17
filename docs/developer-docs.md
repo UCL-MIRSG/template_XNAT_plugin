@@ -36,9 +36,9 @@ user interface.
 
 When you start `xnat-docker-compose` for the first time, a number of directories
 will be created inside your clone copy of the repository. To add the plugin,
-copy the `build/libs/plugin-VERSION-xpl.jar` into the newly created `xnat/plugins`
-directory. Then restart the docker container again following the instructions in
-the README.
+copy the `build/libs/plugin-VERSION-xpl.jar` into the newly created
+`xnat/plugins` directory. Then restart the docker container again following the
+instructions in the README.
 
 ## Run tests locally
 
@@ -52,8 +52,8 @@ Follow the steps below to run the tests locally on your computer:
   ```
 
 - Build the plugin locally, [as described above](#build-the-plugin-locally).
-  This will create a plugin jar at `build/libs/plugin-VERSION-xpl.jar`, which will
-  be used by the tests.
+  This will create a plugin jar at `build/libs/plugin-VERSION-xpl.jar`, which
+  will be used by the tests.
 
 - Run pytest
 
@@ -124,7 +124,9 @@ This will trigger a github actions workflow creating:
 
 - a new Github release with `.jar` attached
 - a new package on
-  [Github packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) - this can be accessed from the `Packages` section in the sidebar of your plugin's github page.
+  [Github packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) -
+  this can be accessed from the `Packages` section in the sidebar of your
+  plugin's github page.
 
 For information about how to use this package as a dependency, see the github
 docs for

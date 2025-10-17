@@ -67,7 +67,9 @@ or in the [`xnat-mrd`](https://github.com/SyneRBI/xnat-mrd) /
 ### Update python test files
 
 These files handle spinning up xnat in a Docker container (via `xnat4tests`),
-and running automated tests. This uses [`xnatpy`](https://xnat.readthedocs.io/en/latest/) to handle calls to the xnat API.
+and running automated tests. This uses
+[`xnatpy`](https://xnat.readthedocs.io/en/latest/) to handle calls to the xnat
+API.
 
 Update `python/tests/conftest.py`:
 
@@ -111,22 +113,26 @@ example of a project with `conda` dependencies.
   the `dependencies` or `dev` lists.
 
 Update `python/src/xnat_plugin/fetch_datasets.py`:
+
 - If you don't need test datasets, you can remove this file.
-- Otherwise, edit the examples in this file to use your own `zenodo` doi links and image names. See the [`xnat-mrd`](https://github.com/SyneRBI/xnat-mrd) /
-  [`xnat-interfile`](https://github.com/SyneRBI/xnat-interfile) repositories for examples of how to use these test datasets in tests.
+- Otherwise, edit the examples in this file to use your own `zenodo` doi links
+  and image names. See the [`xnat-mrd`](https://github.com/SyneRBI/xnat-mrd) /
+  [`xnat-interfile`](https://github.com/SyneRBI/xnat-interfile) repositories for
+  examples of how to use these test datasets in tests.
 
 ### Update github actions workflows
 
 - For the `.github/workflows/linting.yaml` workflow, you need to
-[follow the instructions](https://github.com/pre-commit-ci/lite-action#setup)
-for setting up the pre-commit.ci lite add-on for the
-`Auto-fixes commit and push (pre-commit-ci-lite)` step.
+  [follow the instructions](https://github.com/pre-commit-ci/lite-action#setup)
+  for setting up the pre-commit.ci lite add-on for the
+  `Auto-fixes commit and push (pre-commit-ci-lite)` step.
 
-- For `.github/workflows/test.yaml` to pass successfully, you will need to make one release on `main`.
-  See [the release instructions](./docs/developer-docs.md#creating-a-new-release). 
+- For `.github/workflows/test.yaml` to pass successfully, you will need to make
+  one release on `main`. See
+  [the release instructions](./docs/developer-docs.md#creating-a-new-release).
 
 - If you need additional conda dependencies then you can add another step after
-`Set up Python` in `.github/workflows/test.yaml`:
+  `Set up Python` in `.github/workflows/test.yaml`:
 
 ```yaml
 - name: Set up Miniconda
@@ -155,6 +161,7 @@ file.
 ## Developing the plugin
 
 [Developer documentation](./docs/developer-docs.md) is provided for:
+
 - building the plugin locally
 - running tests locally
 - making new releases on github
