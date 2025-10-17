@@ -231,7 +231,7 @@ to the `build.gradle` in the `xnat-template-plugin`, and read the relevant
 
 ### Workflows
 
-If you need to additional conda dependencies then you can add another step after
+If you need additional conda dependencies then you can add another step after
 `Set up Python` in `.github/workflows/test.yaml`:
 
 ```yaml
