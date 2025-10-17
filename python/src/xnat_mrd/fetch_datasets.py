@@ -15,13 +15,16 @@ def _set_up_zenodo_doi(base_url: str):
 
 
 def _fetch_from_zenodo(
-    base_url: str, image_name: str, zip_file: Optional[str] = None, download_all: Optional[bool] = None
+    base_url: str,
+    image_name: str,
+    zip_file: Optional[str] = None,
+    download_all: Optional[bool] = None,
 ) -> Path:
     """Fetch mrd file from zenodo (if not already cached), and return the file path where
     data is downloaded"""
 
     ZENODO = _set_up_zenodo_doi(base_url)
-    
+
     if zip_file:
         if download_all:
             unpack = pooch.Unzip(members=[zip_file])
@@ -30,7 +33,7 @@ def _fetch_from_zenodo(
         else:
             unpack = pooch.Unzip(members=[image_name])
             image_path = Path(ZENODO.fetch(f"{zip_file}.zip", processor=unpack)[0])
-        
+
     else:
         image_path = Path(ZENODO.fetch(image_name))
 
@@ -67,6 +70,7 @@ def get_single_file_from_zip() -> Path:
         zip_file="PTB_ACRPhantom_GRAPPA",
         download_all=False,
     )
+
 
 def get_all_files_from_zip() -> Path:
     """Fetch interfile file with a single dataset, or return cached path if already present."""
