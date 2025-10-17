@@ -244,6 +244,13 @@ If you need to additional conda dependencies then you can add another step after
     activate-environment: xnat-plugin-env
 ```
 
+You would also need to add the following line to the `Install dependencies` and
+`Run tests with pytest` steps:
+
+```yaml
+shell: bash -l {0} # required to load conda properly
+```
+
 For the `.github/workflows/linting.yaml` workflow, you need to
 [follow the instructions](https://github.com/pre-commit-ci/lite-action#setup)
 for setting up the pre-commit.ci lite add-on for the the
