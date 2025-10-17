@@ -59,19 +59,14 @@ jobs:
           cache: pip
           cache-dependency-path: python/pyproject.toml
 
-      # - name: Set up Miniconda
-      #   uses: conda-incubator/setup-miniconda@v3
-      #   with:
-      #     python-version: 3.12
-      #     auto-update-conda: true
-      #     environment-file: python/environment.yml
-      #     activate-environment: xnat-interfile-env
+      # Set up Miniconda step would go here
 
       - name: Cache pooch datasets
         uses: actions/cache@v4
         with:
           path: ./test-data
-          key: pooch-${{ hashFiles('./python/src/xnat_plugin/fetch_datasets.py') }}
+          key:
+            pooch-${{ hashFiles('./python/src/xnat_plugin/fetch_datasets.py') }}
           restore-keys: |
             pooch-
 
