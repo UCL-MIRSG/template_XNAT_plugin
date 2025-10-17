@@ -148,8 +148,8 @@ before building again with
 To interactively test the plugin, you can spin up your own local XNAT with
 [xnat-docker-compose](https://github.com/NrgXnat/xnat-docker-compose). See their
 README for the relevant setup instructions and docker compose commands. The XNAT
-instance can then be accessed at <http://localhost> if you want to use the XNAT
-user interface.
+instance can then be accessed at `localhost` if you want to use the XNAT user
+interface.
 
 When you start `xnat-docker-compose` for the first time, a number of directories
 will be created inside your clone copy of the repository. To add the plugin,
