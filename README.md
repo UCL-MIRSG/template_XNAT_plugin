@@ -59,30 +59,42 @@ This template was created as part of the
 
 5. Update test files in `python/tests`. These files handle spinning up xnat in a
    Docker container (via `xnat4tests`), and running automated tests.
+   - In `conftest.py`, update the `jar_path` fixture to match the name of your
+     built jar:
 
-- In `conftest.py`, update the `jar_path` fixture to match the name of your
-  built jar:
+   ```python
+   # e.g. to match a jar called test-VERSION-xpl.jar, update to:
+   jar_path = list(jar_dir.glob("test-*xpl.jar"))[0]
+   ```
 
-```python
-# e.g. to match a jar called test-VERSION-xpl.jar, update to:
-jar_path = list(jar_dir.glob("test-*xpl.jar"))[0]
-```
+   - In the same file, update the `plugin_version` fixture to match the jar
+     path:
 
-- In the same file, update the `plugin_version` fixture to match the jar path:
+   ```python
+   # e.g. to match a jar called test-VERSION-xpl.jar, update to:
+   match_version = re.search("test-(.+?)-xpl.jar", jar_path.name)
+   ```
 
-```python
-# e.g. to match a jar called test-VERSION-xpl.jar, update to:
-match_version = re.search("test-(.+?)-xpl.jar", jar_path.name)
-```
+   - In `test_server.py`, a single example test is provided to verify the
+     installed plugin version. You will need to update `"xnatPlugin"` and the
+     expected value of `xnat_plugin.name` to match the `value` / `name` set in
+     your `@XnatPlugin` java class (part of the plugin files in the `/src`
+     directory).
+   - Expand `test_server.py` with additional automated tests for your plugin.
+     E.g. see the [`xnat-mrd`](https://github.com/SyneRBI/xnat-mrd) /
+     [`xnat-interfile`](https://github.com/SyneRBI/xnat-interfile) repositories
+     for further test examples.
 
-- In `test_server.py`, a single example test is provided to verify the installed
-  plugin version. You will need to update `"xnatPlugin"` and the expected value
-  of `xnat_plugin.name` to match the `value` / `name` set in your `@XnatPlugin`
-  java class (part of the plugin files in the `/src` directory).
-- Expand `test_server.py` with additional automated tests for your plugin. E.g.
-  see the [`xnat-mrd`](https://github.com/SyneRBI/xnat-mrd) /
-  [`xnat-interfile`](https://github.com/SyneRBI/xnat-interfile) repositories for
-  further test examples.
+6. Update the `python/tests/pyproject.toml` file. Note: this handles
+   dependencies installed via `pip`. If your tests depend on packages only
+   available via `conda`, you will need to specify those dependencies
+   separately. See the
+   [`xnat-interfile`](https://github.com/SyneRBI/xnat-interfile) repository, for
+   an example of a project with `conda` dependencies.
+   - Update the author email / name
+   - Update the description / name (optional)
+   - Add any extra python dependencies needed for your tests. These can be added
+     to the `dependencies` or `dev` lists.
 
 ## Build the plugin locally
 
