@@ -1,6 +1,48 @@
-# MRD
+# Template XNAT Plugin
 
-Xnat schema for ISMRMRD data format.
+This repository provides a template for an xnat plugin including:
+
+- github actions for automated release (as a github release with attached jars,
+  as well as to
+  [Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
+  )
+- github actions for linting with [pre-commit](https://pre-commit.com/)
+- github actions + python files for running automated tests via
+  [`xnat4tests`](https://github.com/Australian-Imaging-Service/xnat4tests)
+- A framework for downloading test data from Zenodo with
+  [`pooch`](https://www.fatiando.org/pooch/latest/) and caching with github
+  actions
+
+## Using the template
+
+1. Click the green 'Use this template' button at the top right of the
+   [repository main page](https://github.com/UCL-MIRSG/template_XNAT_plugin).
+   Then create a new repository.
+2. Update your plugin details in `build.gradle`:
+   - Change the group from `group "org.nrg.xnatx.plugins"` to a value
+     appropriate for your project. Follow the
+     [standard naming conventions](https://maven.apache.org/guides/mini/guide-naming-conventions.html).
+   - Update the `description` to describe what your plugin does.
+   - At the bottom of the file, update the publishing url to match the github
+     organisation and repository name of your project.
+
+   ```Gradle
+   publishing {
+    publications {
+        ...
+    }
+    repositories {
+      maven {
+        // UPDATE THIS URL LINE
+        url = "https://maven.pkg.github.com/ORGANISATION/REPOSITORY"
+        ...
+      }
+    }
+   }
+
+   ```
+
+3. Update the `rootProject.name` in the `settings.gradle` file
 
 ## Build the plugin locally
 
