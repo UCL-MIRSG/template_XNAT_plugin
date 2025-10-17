@@ -33,7 +33,7 @@ if (versionDetails().lastTag ==~ /^v\d+\.\d+\.\d+$/) {
 }
 version pluginVersion
 
-description "XNAT plugin to support ISMRMRD raw data"
+description "XNAT plugin"
 
 // This provides access to all of these repositories for dependency resolution.
 repositories {

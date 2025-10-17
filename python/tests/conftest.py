@@ -10,23 +10,6 @@ from xnat_mrd.fetch_datasets import get_singledata, get_multidata
 from tests.utils import delete_data, XnatConnection
 
 
-@pytest.fixture
-def mrd_file_path():
-    """Provides the mrd_data filepath"""
-
-    mrd_data = get_singledata()
-
-    return mrd_data
-
-
-@pytest.fixture
-def mrd_file_multidata_path():
-    """Provides the mrd_data filepath"""
-
-    mrd_data = get_multidata()
-
-    return mrd_data
-
 
 @pytest.fixture(scope="session")
 def xnat_version():
@@ -49,15 +32,6 @@ def xnat_container_service_version():
 
 
 @pytest.fixture
-def ensure_mrd_project(xnat_connection):
-    project_id = "mrd"
-    xnat_session = xnat_connection.session
-    if project_id not in xnat_session.projects:
-        xnat_session.put(f"/data/archive/projects/{project_id}")
-        xnat_session.projects.clearcache()
-
-
-@pytest.fixture
 def remove_test_data(xnat_connection):
     yield
     delete_data(xnat_connection.session)
@@ -73,8 +47,8 @@ def xnat_config(xnat_version, xnat_container_service_version):
     return xnat4tests.Config(
         xnat_root_dir=xnat_root_dir,
         docker_build_dir=docker_build_dir,
-        docker_image="xnat_mrd_xnat4tests",
-        docker_container="xnat_mrd_xnat4tests",
+        docker_image="xnat_plugin_xnat4tests",
+        docker_container="xnat_plugin_xnat4tests",
         build_args={
             "xnat_version": xnat_version,
             "xnat_cs_plugin_version": xnat_container_service_version,
@@ -87,7 +61,7 @@ def jar_path():
     """Path of jar built by gradlew"""
 
     jar_dir = Path(__file__).parents[2] / "build" / "libs"
-    jar_path = list(jar_dir.glob("mrd-*xpl.jar"))[0]
+    jar_path = list(jar_dir.glob("xnat-plugin-*xpl.jar"))[0] # mrd-*xpl.jar
 
     if not jar_path.exists():
         raise FileNotFoundError(f"Plugin JAR file not found at {jar_path}")
@@ -104,7 +78,7 @@ def plugin_dir():
 
 @pytest.fixture(scope="session")
 def plugin_version(jar_path):
-    match_version = re.search("mrd-(.+?)-xpl.jar", jar_path.name)
+    match_version = re.search("xnat-plugin-(.+?)-xpl.jar", jar_path.name) #mrd-(.+?)-xpl.jar
 
     if match_version is None:
         raise NameError(
@@ -119,12 +93,12 @@ def xnat_connection(xnat_config, jar_path, plugin_dir):
     xnat4tests.start_xnat(xnat_config)
     connection = XnatConnection(xnat_config)
 
-    # Install Mrd plugin by copying the jar into the container
+    # Install xnat plugin by copying the jar into the container
     status = subprocess.run(
         [
             "docker",
             "exec",
-            "xnat_mrd_xnat4tests",
+            "xnat_plugin_xnat4tests",
             "ls",
             plugin_dir.as_posix(),
         ],
@@ -141,7 +115,7 @@ def xnat_connection(xnat_config, jar_path, plugin_dir):
                     "docker",
                     "cp",
                     str(jar_path),
-                    f"xnat_mrd_xnat4tests:{(plugin_dir / jar_path.name).as_posix()}",
+                    f"xnat_plugin_xnat4tests:{(plugin_dir / jar_path.name).as_posix()}",
                 ],
                 check=True,
             )
