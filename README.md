@@ -370,7 +370,3 @@ For the `.github/workflows/linting.yaml` workflow, you need to
 [follow the instructions](https://github.com/pre-commit-ci/lite-action#setup)
 for setting up the pre-commit.ci lite add-on for the
 `Auto-fixes commit and push (pre-commit-ci-lite)` step.
-
-For the `.github/workflows/links.yaml` workflow to work you need to install the
-[MIRSG Link Token Generator GitHub app](https://github.com/apps/mirsg-link-token-generator)
-and add `APP_ID` and `LINKS_PRIVATE_KEY` to GitHub Actions secrets.
