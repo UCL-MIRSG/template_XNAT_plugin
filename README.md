@@ -251,7 +251,14 @@ You would also need to add the following line to the `Install dependencies` and
 shell: bash -l {0} # required to load conda properly
 ```
 
+An example of this can be found in the
+[xnat-interfile reposistory](https://github.com/SyneRBI/xnat-interfile) with the
+[.github/workflows/test.yaml](https://github.com/SyneRBI/xnat-interfile/blob/main/.github/workflows/test.yaml)
+including the steps stated above and the other required
+[python/environment.yml](https://github.com/SyneRBI/xnat-interfile/blob/main/python/environment.yml)
+file.
+
 For the `.github/workflows/linting.yaml` workflow, you need to
 [follow the instructions](https://github.com/pre-commit-ci/lite-action#setup)
-for setting up the pre-commit.ci lite add-on for the the
+for setting up the pre-commit.ci lite add-on for the
 `Auto-fixes commit and push (pre-commit-ci-lite)` step.
