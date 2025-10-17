@@ -5,10 +5,8 @@ from pathlib import Path
 
 import pytest
 import xnat4tests
-from xnat_mrd.fetch_datasets import get_singledata, get_multidata
 
 from tests.utils import delete_data, XnatConnection
-
 
 
 @pytest.fixture(scope="session")
@@ -61,7 +59,7 @@ def jar_path():
     """Path of jar built by gradlew"""
 
     jar_dir = Path(__file__).parents[2] / "build" / "libs"
-    jar_path = list(jar_dir.glob("xnat-plugin-*xpl.jar"))[0] # mrd-*xpl.jar
+    jar_path = list(jar_dir.glob("xnat-plugin-*xpl.jar"))[0]  # mrd-*xpl.jar
 
     if not jar_path.exists():
         raise FileNotFoundError(f"Plugin JAR file not found at {jar_path}")
@@ -78,7 +76,9 @@ def plugin_dir():
 
 @pytest.fixture(scope="session")
 def plugin_version(jar_path):
-    match_version = re.search("xnat-plugin-(.+?)-xpl.jar", jar_path.name) #mrd-(.+?)-xpl.jar
+    match_version = re.search(
+        "xnat-plugin-(.+?)-xpl.jar", jar_path.name
+    )  # mrd-(.+?)-xpl.jar
 
     if match_version is None:
         raise NameError(

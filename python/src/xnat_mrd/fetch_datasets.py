@@ -15,24 +15,33 @@ def _set_up_zenodo_doi(base_url: str):
 
 
 def _fetch_from_zenodo(
-    base_url: str, image_name: str, zip_file: Optional[str] = None
+    base_url: str,
+    image_name: str,
+    zip_file: Optional[str] = None,
+    extract_all: Optional[bool] = True,
 ) -> Path:
-    """Fetch mrd file from zenodo (if not already cached), and return the file path where
+    """Fetch file(s) from zenodo (if not already cached), and return the file path where
     data is downloaded"""
 
     ZENODO = _set_up_zenodo_doi(base_url)
 
     if zip_file:
-        unpack = pooch.Unzip(members=[image_name])
-        image_path = Path(ZENODO.fetch(f"{zip_file}.zip", processor=unpack)[0])
+        if extract_all:
+            unpack = pooch.Unzip(members=[zip_file])
+            ZENODO.fetch(f"{zip_file}.zip", processor=unpack)
+            image_path = ZENODO.path / f"{zip_file}.zip.unzip" / zip_file / image_name
+        else:
+            unpack = pooch.Unzip(members=[image_name])
+            image_path = Path(ZENODO.fetch(f"{zip_file}.zip", processor=unpack)[0])
+
     else:
         image_path = Path(ZENODO.fetch(image_name))
 
     return image_path
 
 
-def get_multidata() -> Path:
-    """Fetch mrd file with multiple datasets, or return cached path if already present."""
+def get_single_file() -> Path:
+    """Fetch a single file, or return cached path if already present."""
     test_data_dir = Path(__file__).parents[3] / "test-data"
     image_path = test_data_dir / "cart_t1_msense_integrated.mrd"
     if image_path.exists():
@@ -43,8 +52,8 @@ def get_multidata() -> Path:
     )
 
 
-def get_singledata() -> Path:
-    """Fetch mrd file with a single dataset, or return cached path if already present."""
+def get_single_file_from_zip() -> Path:
+    """Fetch a zip folder and extract a single file, or return cached path if already present."""
 
     test_data_dir = (
         Path(__file__).parents[3]
@@ -59,4 +68,21 @@ def get_singledata() -> Path:
         "doi:10.5281/zenodo.2633785",
         "PTB_ACRPhantom_GRAPPA/ptb_resolutionphantom_fully_ismrmrd.h5",
         zip_file="PTB_ACRPhantom_GRAPPA",
+        extract_all=False,
+    )
+
+
+def get_all_files_from_zip() -> Path:
+    """Fetch a zip folder and extract all files, or return cached path if already present."""
+
+    test_data_dir = Path(__file__).parents[3] / "test-data"
+    image_path = test_data_dir / "NEMA_IQ" / "20170809_NEMA_60min_UCL.l.hdr"
+
+    if image_path.exists():
+        return image_path
+    return _fetch_from_zenodo(
+        "doi:10.5281/zenodo.1304454",
+        "20170809_NEMA_60min_UCL.l.hdr",
+        zip_file="NEMA_IQ",
+        extract_all=True,
     )
