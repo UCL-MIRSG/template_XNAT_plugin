@@ -336,3 +336,37 @@ You may encounter some errors on update, if certain features of your
 `build.gradle` have been deprecated in new `gradle` versions. To fix this, refer
 to the `build.gradle` in the `xnat-template-plugin`, and read the relevant
 [gradle upgrade guides](https://docs.gradle.org/current/userguide/upgrading_version_7.html).
+
+### Workflows
+
+If you need additional conda dependencies then you can add another step after
+`Set up Python` in `.github/workflows/test.yaml`:
+
+```yaml
+- name: Set up Miniconda
+  uses: conda-incubator/setup-miniconda@v3
+  with:
+    python-version: 3.12
+    auto-update-conda: true
+    environment-file: python/environment.yml
+    activate-environment: xnat-plugin-env
+```
+
+You would also need to add the following line to the `Install dependencies` and
+`Run tests with pytest` steps:
+
+```yaml
+shell: bash -l {0} # required to load conda properly
+```
+
+An example of this can be found in the
+[xnat-interfile reposistory](https://github.com/SyneRBI/xnat-interfile) with the
+[.github/workflows/test.yaml](https://github.com/SyneRBI/xnat-interfile/blob/main/.github/workflows/test.yaml)
+including the steps stated above and the other required
+[python/environment.yml](https://github.com/SyneRBI/xnat-interfile/blob/main/python/environment.yml)
+file.
+
+For the `.github/workflows/linting.yaml` workflow, you need to
+[follow the instructions](https://github.com/pre-commit-ci/lite-action#setup)
+for setting up the pre-commit.ci lite add-on for the
+`Auto-fixes commit and push (pre-commit-ci-lite)` step.
