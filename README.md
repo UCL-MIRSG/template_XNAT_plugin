@@ -116,14 +116,7 @@ example of a project with `conda` dependencies.
 versions installed, ensure your IDE is set to use the correct version, or the
 `JAVA_HOME` environment variable is set to the `Java 8` path.
 
-In order to create the plugin clone the repository:
-
-```shell
-git clone https://github.com/SyneRBI/xnat-mrd.git
-cd xnat-mrd
-```
-
-and then use gradlew to build the plugin
+Use gradlew to build the plugin:
 
 ```shell
 ./gradlew init
@@ -153,7 +146,7 @@ user interface.
 
 When you start `xnat-docker-compose` for the first time, a number of directories
 will be created inside your clone copy of the repository. To add the plugin,
-copy the `build/libs/mrd-VERSION-xpl.jar` into the newly created `xnat/plugins`
+copy the `build/libs/plugin-VERSION-xpl.jar` into the newly created `xnat/plugins`
 directory. Then restart the docker container again following the instructions in
 the README.
 
@@ -169,7 +162,7 @@ Follow the steps below to run the tests locally on your computer:
   ```
 
 - Build the plugin locally, [as described above](#build-the-plugin-locally).
-  This will create a plugin jar at `build/libs/mrd-VERSION-xpl.jar`, which will
+  This will create a plugin jar at `build/libs/plugin-VERSION-xpl.jar`, which will
   be used by the tests.
 
 - Run pytest
@@ -241,7 +234,7 @@ This will trigger a github actions workflow creating:
 
 - a new Github release with `.jar` attached
 - a new package on
-  [Github packages](https://github.com/orgs/SyneRBI/packages?repo_name=xnat-mrd)
+  [Github packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) - this can be accessed from the `Packages` section in the sidebar of your plugin's github page.
 
 For information about how to use this package as a dependency, see the github
 docs for
