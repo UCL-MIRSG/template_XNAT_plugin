@@ -9,13 +9,15 @@ on:
   pull_request:
 
 jobs:
-  links:
+  linkChecker:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    permissions:
+      issues: write # required for peter-evans/create-issue-from-file
     steps:
-      - name: Check links
-        uses: UCL-MIRSG/.github/actions/links@2a42923bba8b048f9de4e087af25af795d4f930b # v0
+      - uses: actions/checkout@v4
+
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
         with:
-          app-id: ${{ vars.LINKS_APP_ID }}
-          app-pem: ${{ secrets.LINKS_PRIVATE_KEY }}
-          lychee-args: --insecure --no-progress --verbose .
+          fail: false
