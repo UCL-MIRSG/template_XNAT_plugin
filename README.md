@@ -13,6 +13,13 @@ This repository provides a template for an xnat plugin including:
   [`pooch`](https://www.fatiando.org/pooch/latest/) and caching with github
   actions
 
+See the [`xnat-mrd`](https://github.com/SyneRBI/xnat-mrd) or
+[`xnat-interfile`](https://github.com/SyneRBI/xnat-interfile) repositories, for
+examples of plugins that use this template.
+
+This template was created as part of the
+[SyneRBI project](https://github.com/SyneRBI).
+
 ## Using the template
 
 1. Click the green 'Use this template' button at the top right of the
@@ -43,6 +50,39 @@ This repository provides a template for an xnat plugin including:
    ```
 
 3. Update the `rootProject.name` in the `settings.gradle` file
+
+4. Fill the `/src` directory with your plugin files. You can find examples in
+   the official
+   [`xnat-template-plugin repository`](https://bitbucket.org/xnatx/xnat-template-plugin/src/master/),
+   or in the [`xnat-mrd`](https://github.com/SyneRBI/xnat-mrd) /
+   [`xnat-interfile`](https://github.com/SyneRBI/xnat-interfile) repositories.
+
+5. Update test files in `python/tests`. These files handle spinning up xnat in a
+   Docker container (via `xnat4tests`), and running automated tests.
+
+- In `conftest.py`, update the `jar_path` fixture to match the name of your
+  built jar:
+
+```python
+# e.g. to match a jar called test-VERSION-xpl.jar, update to:
+jar_path = list(jar_dir.glob("test-*xpl.jar"))[0]
+```
+
+- In the same file, update the `plugin_version` fixture to match the jar path:
+
+```python
+# e.g. to match a jar called test-VERSION-xpl.jar, update to:
+match_version = re.search("test-(.+?)-xpl.jar", jar_path.name)
+```
+
+- In `test_server.py`, a single example test is provided to verify the installed
+  plugin version. You will need to update `"xnatPlugin"` and the expected value
+  of `xnat_plugin.name` to match the `value` / `name` set in your `@XnatPlugin`
+  java class (part of the plugin files in the `/src` directory).
+- Expand `test_server.py` with additional automated tests for your plugin. E.g.
+  see the [`xnat-mrd`](https://github.com/SyneRBI/xnat-mrd) /
+  [`xnat-interfile`](https://github.com/SyneRBI/xnat-interfile) repositories for
+  further test examples.
 
 ## Build the plugin locally
 
