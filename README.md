@@ -232,5 +232,5 @@ to the `build.gradle` in the `xnat-template-plugin`, and read the relevant
 ### Links
 
 For the `.github/workflows/links.yaml` workflow to work you need to install the
-[MIRSG Link Token Generator GitHub app](https://github.com/organizations/UCL-MIRSG/settings/installations/59151156)
+[MIRSG Link Token Generator GitHub app](https://github.com/apps/mirsg-link-token-generator)
 and add `APP_ID` and `LINKS_PRIVATE_KEY` to GitHub Actions secrets.
