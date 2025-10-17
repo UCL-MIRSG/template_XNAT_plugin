@@ -1,0 +1,1 @@
+# template_XNAT_plugin
