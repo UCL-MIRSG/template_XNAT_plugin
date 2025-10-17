@@ -156,19 +156,6 @@ If you want to disable the pre-commit hooks:
 pre-commit uninstall
 ```
 
-## Requirements
-
-If using uv, you can install required dependencies and run
-`populate_datatype_fields.py` with:
-
-```shell
-
-uv run populate_datatype_fields.py
-```
-
-However, the `pyproject.toml` file is still available if running the code as
-normal with python.
-
 ## Version updates
 
 Currently, versions of plugins / gradle are updated manually when required:
