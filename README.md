@@ -228,3 +228,9 @@ You may encounter some errors on update, if certain features of your
 `build.gradle` have been deprecated in new `gradle` versions. To fix this, refer
 to the `build.gradle` in the `xnat-template-plugin`, and read the relevant
 [gradle upgrade guides](https://docs.gradle.org/current/userguide/upgrading_version_7.html).
+
+### Links
+
+For the `.github/workflows/links.yaml` workflow to work you need to install the
+[MIRSG Link Token Generator GitHub app](https://github.com/organizations/UCL-MIRSG/settings/installations/59151156)
+and add `APP_ID` and `LINKS_PRIVATE_KEY` to GitHub Actions secrets.
