@@ -4,16 +4,16 @@ requires = ["setuptools"]
 
 [project]
 authors = [
-    {email = "arc.collaborations@ucl.ac.uk", name = "Centre for Advanced Research Computing"},
+    {email = "example-email@example.com", name = "Example name"},
 ]
 classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
 ]
-dependencies = ["h5py", "ismrmrd", "pooch", "xmlschema", "xnat"]
-description = "populate datatype fields"
+dependencies = ["pooch", "xnat"]
+description = "XNAT plugin"
 license = "Apache-2.0"
-name = "xnatmrd"
+name = "xnat-plugin"
 readme = "README.md"
 requires-python = "==3.13.*"
 version = "0.0.1"

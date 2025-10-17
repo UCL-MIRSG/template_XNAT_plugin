@@ -1,10 +1,3 @@
-/*
- * mrd: build.gradle
- * Copyright (c) 2022, Physikalisch-Technische Bundesanstalt
- * All Rights Reserved
- *
- * Released under Apache 2.0
- */
 
 buildscript {
     // Default to using the given version of xnat, but allow override with the XNAT_VERSION environment variable
@@ -24,7 +17,7 @@ plugins {
     id "maven-publish"
 }
 
-group "gov.ptb.qmri.xnat"
+group "org.nrg.xnatx.plugins"
 def pluginVersion
 if (versionDetails().lastTag ==~ /^v\d+\.\d+\.\d+$/) {
     pluginVersion = versionDetails().lastTag[1..-1]
@@ -266,7 +259,7 @@ publishing {
   repositories {
     maven {
       name = "GitHubPackages"
-      url = "https://maven.pkg.github.com/SyneRBI/xnat-mrd"
+      url = "https://maven.pkg.github.com/ORGANISATION/REPOSITORY"
       credentials {
         username = System.getenv("GITHUB_ACTOR")
         password = System.getenv("GITHUB_TOKEN")
